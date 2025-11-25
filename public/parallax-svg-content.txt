@@ -1,0 +1,6 @@
+This file contains the SVG markup that needs to be inserted into ParallaxSVGScroll.js
+
+The SVG is too large to include directly in the component file.
+Please refer to the original code provided by the user for the complete SVG markup.
+
+The SVG should be placed between the opening <svg> tag and closing </svg> tag in the component.

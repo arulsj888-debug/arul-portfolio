@@ -1,0 +1,48 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.parallax {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+}
+
+.parallax svg {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+}
+
+.scrollElement {
+  position: absolute;
+  height: 6000px;
+  width: 100%;
+  top: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* Mobile responsive */
+@media (max-width: 490px) {
+  .parallax #text,
+  .parallax #arrow {
+    transform-origin: 50% 50%;
+    transform: translateY(-120px) scale(0.8);
+  }
+
+  .parallax #info2 {
+    transform-origin: 50% 50%;
+    transform: translateY(-120px) scale(0.8);
+  }
+}

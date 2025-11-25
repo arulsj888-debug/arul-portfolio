@@ -1,0 +1,156 @@
+.terminalContainer {
+  width: 100%;
+  max-width: 700px;
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(255, 255, 255, 0.1);
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  margin: 2rem 0;
+}
+
+.terminalHeader {
+  background: #2d2d2d;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #3d3d3d;
+}
+
+.terminalButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.terminalButtons span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+}
+
+.btnClose {
+  background: #ff5f56;
+}
+
+.btnMinimize {
+  background: #ffbd2e;
+}
+
+.btnMaximize {
+  background: #27c93f;
+}
+
+.terminalTitle {
+  color: #8b8b8b;
+  font-size: 0.85rem;
+  font-weight: 500;
+  flex: 1;
+  text-align: center;
+  margin-right: 60px;
+}
+
+.terminalBody {
+  background: #1e1e1e;
+  padding: 20px;
+  height: 400px;
+  overflow: hidden;
+  color: #d4d4d4;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  position: relative;
+  pointer-events: none;
+}
+
+.terminalContent {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.terminalContent::-webkit-scrollbar {
+  display: none;
+}
+
+.terminalBody::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminalBody::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+.terminalBody::-webkit-scrollbar-thumb {
+  background: #3d3d3d;
+  border-radius: 4px;
+}
+
+.terminalBody::-webkit-scrollbar-thumb:hover {
+  background: #4d4d4d;
+}
+
+.terminalLine {
+  margin-bottom: 4px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.commandLine {
+  color: #4ec9b0;
+  font-weight: 600;
+}
+
+.epochLine {
+  color: #ce9178;
+}
+
+.successLine {
+  color: #4ec9b0;
+  font-weight: 600;
+}
+
+.errorLine {
+  color: #f48771;
+}
+
+.cursor {
+  color: #4ec9b0;
+  animation: blink 1s infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .terminalContainer {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .terminalBody {
+    height: 350px;
+    padding: 16px;
+    font-size: 0.85rem;
+  }
+
+  .terminalTitle {
+    font-size: 0.75rem;
+  }
+
+  .terminalButtons span {
+    width: 10px;
+    height: 10px;
+  }
+}

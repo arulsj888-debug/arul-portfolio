@@ -1,0 +1,307 @@
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.arsenalButton {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2.5rem;
+  background: rgba(30, 30, 40, 0.6);
+  backdrop-filter: blur(10px);
+  border: 2px solid;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.arsenalButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.arsenalButton:hover::before {
+  opacity: 1;
+}
+
+.arsenalButton:hover {
+  transform: translateY(-2px);
+}
+
+.buttonIcon {
+  font-size: 1.5rem;
+}
+
+.buttonText {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.buttonArrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.arsenalButton:hover .buttonArrow {
+  transform: translateX(5px);
+}
+
+/* Mode-specific button styles */
+.arsenalButton.neutral {
+  background: rgba(0, 100, 200, 0.15);
+  border-color: rgba(0, 150, 255, 0.5);
+  color: #00aaff;
+  box-shadow: 0 4px 20px rgba(0, 150, 255, 0.3);
+}
+
+.arsenalButton.neutral:hover {
+  background: rgba(0, 100, 200, 0.25);
+  border-color: rgba(0, 150, 255, 0.7);
+  box-shadow: 0 6px 30px rgba(0, 150, 255, 0.5);
+}
+
+.arsenalButton.light {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.arsenalButton.light:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+}
+
+.arsenalButton.dark {
+  background: rgba(60, 60, 80, 0.3);
+  border-color: rgba(200, 200, 220, 0.4);
+  color: #c8c8dc;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.arsenalButton.dark:hover {
+  background: rgba(60, 60, 80, 0.5);
+  border-color: rgba(200, 200, 220, 0.6);
+  box-shadow: 0 6px 30px rgba(200, 200, 220, 0.3);
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  backdrop-filter: blur(5px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Modal */
+.modal {
+  width: 100%;
+  max-width: 1200px;
+  max-height: 90vh;
+  background: rgba(20, 20, 30, 0.7);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  border: none;
+  padding: 2.5rem;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal.neutral {
+  background: rgba(10, 30, 60, 0.7);
+  box-shadow: 0 20px 60px rgba(0, 150, 255, 0.2);
+}
+
+.modal.light {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.modal.dark {
+  background: rgba(20, 20, 40, 0.7);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal Header */
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.modalTitle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+}
+
+.modal.light .modalTitle {
+  color: #333333;
+}
+
+.titleIcon {
+  font-size: 2.5rem;
+}
+
+.closeButton {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.light .closeButton {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #333333;
+}
+
+.closeButton:hover {
+  background: rgba(255, 0, 0, 0.2);
+  border-color: rgba(255, 0, 0, 0.5);
+  transform: rotate(90deg);
+}
+
+/* Skills Grid */
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.skillCard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.modal.light .skillCard {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.skillCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 150, 255, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 150, 255, 0.2);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.cardIcon {
+  font-size: 2rem;
+}
+
+.cardTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #ffffff;
+}
+
+.modal.light .cardTitle {
+  color: #333333;
+}
+
+.cardItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.skillTag {
+  padding: 0.5rem 1rem;
+  background: rgba(0, 150, 255, 0.15);
+  border: 1px solid rgba(0, 150, 255, 0.3);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #00aaff;
+  transition: all 0.3s ease;
+}
+
+.modal.light .skillTag {
+  background: rgba(0, 100, 200, 0.1);
+  border-color: rgba(0, 100, 200, 0.3);
+  color: #0066cc;
+}
+
+.skillTag:hover {
+  background: rgba(0, 150, 255, 0.25);
+  border-color: rgba(0, 150, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal {
+    padding: 1.5rem;
+    max-height: 85vh;
+  }
+
+  .modalTitle {
+    font-size: 1.5rem;
+  }
+
+  .skillsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .arsenalButton {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+/* Hide Scrollbar */
+.modal::-webkit-scrollbar {
+  width: 0px;
+  display: none;
+}
+
+.modal {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}

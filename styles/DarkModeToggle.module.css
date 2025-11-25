@@ -1,0 +1,77 @@
+.toggleContainer {
+  position: fixed;
+  z-index: 10000;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Default: top right */
+  top: 2rem;
+  right: 2rem;
+  left: auto;
+  bottom: auto;
+  transform: none;
+}
+
+.toggleContainer.centered {
+  /* Centered: bottom center */
+  top: auto;
+  right: auto;
+  left: 50%;
+  bottom: 8rem;
+  transform: translateX(-50%);
+}
+
+.toggleButton {
+  width: 240px;
+  height: 110px;
+  background: #9cd6ef;
+  border: 6px solid #65c0e7;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background 1s ease, border-color 1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.toggleButton.neutral {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.toggleButton.day {
+  background: #9cd6ef;
+  border-color: #65c0e7;
+}
+
+.toggleButton.night {
+  background: #224f6d;
+  border-color: #cad4d8;
+}
+
+.toggleSvg {
+  width: 100%;
+  height: 100%;
+  transform: scale(0.7);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .toggleContainer {
+    top: 1rem;
+    right: 1rem;
+  }
+  
+  .toggleContainer.centered {
+    bottom: 6rem;
+  }
+  
+  .toggleButton {
+    width: 180px;
+    height: 85px;
+  }
+  
+  .toggleSvg {
+    transform: scale(0.6);
+  }
+}

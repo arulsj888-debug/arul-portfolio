@@ -1,0 +1,42 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.parallax {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+}
+
+.wrapper :global(.scrollElement) {
+  position: absolute;
+  height: 6000px;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Mobile responsive */
+@media (max-width: 490px) {
+  .wrapper :global(#text),
+  .wrapper :global(#arrow) {
+    transform-origin: 50% 50%;
+    transform: translateY(-120px) scale(0.8);
+  }
+
+  .wrapper :global(#info2) {
+    transform-origin: 50% 50%;
+    transform: translateY(-120px) scale(0.8);
+  }
+}
