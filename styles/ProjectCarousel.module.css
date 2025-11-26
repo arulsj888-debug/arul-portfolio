@@ -1,7 +1,7 @@
 .mainContainer {
   display: grid;
-  /* Columns: [Carousel] [Explanation] [Remaining Space] */
-  grid-template-columns: 450px 420px 1fr; 
+  /* Columns: [Carousel] [Explanation - wider] [Remaining Space] */
+  grid-template-columns: 450px minmax(600px, 800px) 1fr; 
   width: 100%;
   max-width: 100%; /* Ensure full width */
   margin: 0;

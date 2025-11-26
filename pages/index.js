@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/router";
 import ParallaxBackground from "../components/ParallaxBackground";
 import ProjectCarousel from "../components/ProjectCarousel";
 import HelloAnimation from "../components/HelloAnimation";
@@ -12,16 +13,20 @@ import GlitchText from "../components/GlitchText";
 import GlowButton from "../components/GlowButton";
 import QuickActions from "../components/QuickActions";
 import TechnicalArsenal from "../components/TechnicalArsenal";
+
 import Script from "next/script";
 
 export default function Home() {
+  const router = useRouter();
   const [showPortfolio, setShowPortfolio] = useState(false);
   const [hideHello, setHideHello] = useState(false);
+  const [shouldShowHello, setShouldShowHello] = useState(null); // null = checking, true = show, false = skip
   const [backgroundMode, setBackgroundMode] = useState('neutral');
   const [carouselIndex, setCarouselIndex] = useState(0);
   const projectsRef = useRef(null);
   const labsRef = useRef(null);
   const contactRef = useRef(null);
+  const technicalArsenalRef = useRef(null);
 
   // Map lab names to project indices
   const projectMap = {
@@ -82,10 +87,29 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const portfolioTimer = setTimeout(() => {
+    // Check if user is returning from another page or has seen hello before
+    const hasSeenHello = localStorage.getItem('hasSeenHello');
+    const fromOtherPage = router.query.from;
+    const isReturning = hasSeenHello || fromOtherPage;
+    
+    if (isReturning) {
+      // Skip hello animation completely
+      setShouldShowHello(false);
+      setHideHello(true);
       setShowPortfolio(true);
-    }, 5800);
+    } else {
+      // First time visitor - show hello animation
+      setShouldShowHello(true);
+      const portfolioTimer = setTimeout(() => {
+        setShowPortfolio(true);
+        localStorage.setItem('hasSeenHello', 'true');
+      }, 5800);
 
+      return () => clearTimeout(portfolioTimer);
+    }
+  }, [router.query]);
+
+  useEffect(() => {
     const observerOptions = {
       threshold: 0.1,
       rootMargin: "0px 0px -50px 0px"
@@ -103,7 +127,6 @@ export default function Home() {
     fadeElements.forEach(el => observer.observe(el));
 
     return () => {
-      clearTimeout(portfolioTimer);
       observer.disconnect();
     };
   }, []);
@@ -143,7 +166,7 @@ export default function Home() {
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" strategy="beforeInteractive" />
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js" strategy="beforeInteractive" />
 
-      {!hideHello && (
+      {shouldShowHello && !hideHello && (
         <HelloAnimation 
           onComplete={() => setHideHello(true)} 
         />
@@ -164,9 +187,9 @@ export default function Home() {
       )}
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: shouldShowHello === false ? 1 : 0, scale: shouldShowHello === false ? 1 : 0.95 }}
         animate={{ opacity: showPortfolio ? 1 : 0, scale: showPortfolio ? 1 : 0.95 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        transition={{ duration: shouldShowHello === false ? 0 : 1, ease: "easeOut" }}
         style={{ pointerEvents: showPortfolio ? 'auto' : 'none' }}
       >
         {backgroundMode === 'dark' ? (
@@ -194,6 +217,8 @@ export default function Home() {
               </motion.p>
             </section>
 
+
+
             <section className="section fade-in">
               <h2 className="section-title">A Little History</h2>
               <div className="about-text">
@@ -215,7 +240,9 @@ export default function Home() {
                 </p>
               </div>
 
-              <TechnicalArsenal mode={backgroundMode} />
+              <div ref={technicalArsenalRef}>
+                <TechnicalArsenal mode={backgroundMode} />
+              </div>
 
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -242,10 +269,10 @@ export default function Home() {
             {/* Align title to the left (approx 4vw margin to match carousel) */}
             <h2 
               className="section-title" 
-              style={{ marginLeft: "4vw", marginBottom: "0" }}
+              style={{ marginLeft: "4vw", marginBottom: "3rem", marginTop: "2rem" }}
               ref={projectsRef}
             >
-              Selected Projects
+              Projects
             </h2>
             <ProjectCarousel 
               externalIndex={carouselIndex}
@@ -253,29 +280,42 @@ export default function Home() {
             />
           </section>
 
+          {/* AI & Vision Systems Section - FULL WIDTH */}
+          <section className="section" ref={labsRef} style={{ 
+            width: '100%', 
+            maxWidth: '100%', 
+            padding: '4rem 0',
+            margin: '0',
+            position: 'relative',
+            zIndex: 10
+          }}>
+            <h2 className="section-title" style={{ textAlign: 'center', marginBottom: '3rem', position: 'relative', zIndex: 10 }}>AI & Vision Systems</h2>
+            <div className="labs-grid" style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(3, 1fr)', 
+              gap: '1.5rem', 
+              width: '100%',
+              maxWidth: 'none',
+              margin: '0',
+              padding: '0 3vw',
+              position: 'relative',
+              zIndex: 10
+            }}>
+              <GlowButton title="AI Automated Proctoring System" onClick={() => scrollToProject('Proctoring')} mode={backgroundMode} />
+              <GlowButton title="Classroom Emotion Detection System" onClick={() => scrollToProject('Emotion')} mode={backgroundMode} />
+              <GlowButton title="SOS Attendance System" onClick={() => scrollToProject('SOS')} mode={backgroundMode} />
+              <GlowButton title="K-Quiz Gamified Learning" onClick={() => scrollToProject('KQuiz')} mode={backgroundMode} />
+              <GlowButton title="AI Gesture-Based Quiz Platform" onClick={() => scrollToProject('Quiz')} mode={backgroundMode} />
+              <GlowButton title="AI Tutor System" onClick={() => scrollToProject('AITutor')} mode={backgroundMode} />
+              <GlowButton title="AgroScan AI Crop Disease Detection" onClick={() => scrollToProject('AgroScan')} mode={backgroundMode} />
+              <GlowButton title="VS Quiz AR Holographic Trivia" onClick={() => scrollToProject('VSQuiz')} mode={backgroundMode} />
+              <GlowButton title="AI Virtual Mouse Control" onClick={() => scrollToProject('VirtualMouse')} mode={backgroundMode} />
+              <GlowButton title="Smart Annotation Tool" onClick={() => scrollToProject('SmartAnnotation')} mode={backgroundMode} />
+            </div>
+          </section>
+
           {/* Bottom Section - Centered */}
           <div className="container">
-            <section className="section" ref={labsRef}>
-              <h2 className="section-title">AI & Vision Systems</h2>
-              <div className="labs-grid" style={{ 
-                display: 'grid', 
-                gridTemplateColumns: 'repeat(2, 1fr)', 
-                gap: '1.5rem', 
-                maxWidth: '900px',
-                margin: '0 auto'
-              }}>
-                <GlowButton title="AI Automated Proctoring System" onClick={() => scrollToProject('Proctoring')} mode={backgroundMode} />
-                <GlowButton title="Classroom Emotion Detection System" onClick={() => scrollToProject('Emotion')} mode={backgroundMode} />
-                <GlowButton title="SOS Attendance System" onClick={() => scrollToProject('SOS')} mode={backgroundMode} />
-                <GlowButton title="K-Quiz Gamified Learning" onClick={() => scrollToProject('KQuiz')} mode={backgroundMode} />
-                <GlowButton title="AI Gesture-Based Quiz Platform" onClick={() => scrollToProject('Quiz')} mode={backgroundMode} />
-                <GlowButton title="AI Tutor System" onClick={() => scrollToProject('AITutor')} mode={backgroundMode} />
-                <GlowButton title="AgroScan AI Crop Disease Detection" onClick={() => scrollToProject('AgroScan')} mode={backgroundMode} />
-                <GlowButton title="VS Quiz AR Holographic Trivia" onClick={() => scrollToProject('VSQuiz')} mode={backgroundMode} />
-                <GlowButton title="AI Virtual Mouse Control" onClick={() => scrollToProject('VirtualMouse')} mode={backgroundMode} />
-                <GlowButton title="Smart Annotation Tool" onClick={() => scrollToProject('SmartAnnotation')} mode={backgroundMode} />
-              </div>
-            </section>
 
             <section className="section" ref={contactRef}>
               <h2 className="section-title">Get in Touch</h2>
@@ -331,13 +371,15 @@ export default function Home() {
                       marginTop: "1rem"
                     }}
                   >
-                    <a href="https://github.com/yourhandle" target="_blank" rel="noopener noreferrer" className="contact-link">GitHub</a>
+                    <a href="https://github.com/arulsj888-debug" target="_blank" rel="noopener noreferrer" className="contact-link">GitHub</a>
                     <span>·</span>
-                    <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="contact-link">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/arul-vendhan-8a9828326/" target="_blank" rel="noopener noreferrer" className="contact-link">LinkedIn</a>
                   </motion.div>
                 </div>
               </div>
             </section>
+
+
 
             <footer className="footer">
               <p>© {new Date().getFullYear()} Arul Vendhan · Tamil Nadu, India</p>
