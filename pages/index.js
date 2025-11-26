@@ -358,7 +358,7 @@ export default function Home() {
                     }}
                   >
                     <span style={{ fontSize: "1.5rem" }}>☎</span>
-                    <a href="tel:+918237564364" className="contact-link" style={{ fontSize: "1.1rem" }}>+91 8237564364</a>
+                    <a href="tel:+918248795059" className="contact-link" style={{ fontSize: "1.1rem" }}>+91 8248795059</a>
                   </motion.div>
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
