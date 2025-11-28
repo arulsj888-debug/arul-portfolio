@@ -126,8 +126,6 @@ KEY TECHNICAL FEATURES
     year: "2025",
     confidence: "0.96",
     link: "https://zentrixnexus.in/",
-    isPrivate: true, // <--- ADD THIS LINE
-    repoLink: "https://github.com/arulsj888-debug/k-quiz-platform" // Keep this for reference
   },
   {
     id: 7,
@@ -443,45 +441,16 @@ export default function ProjectCarousel({ onIndexChange, externalIndex }) {
               transition={{ delay: 0.7 }}
             >
               <span className={styles.year}>{projects[currentIndex].year}</span>
-              
-              <div style={{ display: 'flex', gap: '10px' }}>
-                {/* 1. Live Site Link */}
-                {projects[currentIndex].link && (
-                  <a 
-                    href={projects[currentIndex].link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className={styles.projectLink}
-                  >
-                    Live Site →
-                  </a>
-                )}
-
-                {/* 2. Private Repo Logic */}
-                {projects[currentIndex].isPrivate ? (
-                  <a 
-                    href={`mailto:arulsj888@gmail.com?subject=Request Access to K-Quiz Repo&body=Hi Arul,%0D%0A%0D%0AI am interested in reviewing the architecture for the K-Quiz platform.%0D%0A%0D%0AMy GitHub Username is: `}
-                    className={styles.projectLink}
-                    style={{ 
-                      background: "rgba(255, 165, 0, 0.15)", 
-                      borderColor: "#ffae00", 
-                      color: "#ffae00",
-                      boxShadow: "0 0 10px rgba(255, 165, 0, 0.2)"
-                    }}
-                  >
-                    🔒 Request Code
-                  </a>
-                ) : projects[currentIndex].repoLink && (
-                  <a 
-                    href={projects[currentIndex].repoLink} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className={styles.projectLink}
-                  >
-                    View Code
-                  </a>
-                )}
-              </div>
+              {projects[currentIndex].link && (
+                <a 
+                  href={projects[currentIndex].link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={styles.projectLink}
+                >
+                  Visit Live Site →
+                </a>
+              )}
             </motion.div>
           </motion.div>
         </AnimatePresence>
