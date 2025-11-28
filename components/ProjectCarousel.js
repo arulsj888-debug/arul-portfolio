@@ -120,12 +120,14 @@ KEY TECHNICAL FEATURES
     name: "K-Quiz (Gamified Learning Platform)",
     role: "Full-Stack · Game Logic",
     image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&q=80",
-    description: "Real-time educational gaming platform deployed at zentrixnexus.in. Transforms classroom assessments into engaging, interactive experiences where students compete individually or in teams using their own devices.",
+    description: "Real-time educational gaming platform deployed at zentrixnexus.in...",
     tech: ["FastAPI", "WebSockets", "React", "MongoDB", "OpenAI API", "Google OAuth"],
-    details: "Built comprehensive platform with 7 game modes: Classic Quiz with lifelines, Elimination Battle Royale, Team Battle with auto-balancing, Jigsaw Race with drag-and-drop puzzles, AI-powered PPT Mode using GPT-4o-mini for content generation, Wordle-style Spin Game, and Rock-Paper-Scissors. Engineered custom GameManager class handling complex state management for dozens of concurrent rooms with sub-second WebSocket latency. Implemented Google OAuth for teachers, 6-digit game codes for instant student access, real-time analytics dashboard with live charts, and spectator mode for eliminated players.",
+    details: "Built comprehensive platform with 7 game modes...",
     year: "2025",
     confidence: "0.96",
-    link: "https://zentrixnexus.in/"
+    link: "https://zentrixnexus.in/",
+    isPrivate: true, // <--- ADD THIS LINE
+    repoLink: "https://github.com/arulsj888-debug/k-quiz-platform" // Keep this for reference
   },
   {
     id: 7,
@@ -441,16 +443,45 @@ export default function ProjectCarousel({ onIndexChange, externalIndex }) {
               transition={{ delay: 0.7 }}
             >
               <span className={styles.year}>{projects[currentIndex].year}</span>
-              {projects[currentIndex].link && (
-                <a 
-                  href={projects[currentIndex].link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className={styles.projectLink}
-                >
-                  Visit Live Site →
-                </a>
-              )}
+              
+              <div style={{ display: 'flex', gap: '10px' }}>
+                {/* 1. Live Site Link */}
+                {projects[currentIndex].link && (
+                  <a 
+                    href={projects[currentIndex].link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={styles.projectLink}
+                  >
+                    Live Site →
+                  </a>
+                )}
+
+                {/* 2. Private Repo Logic */}
+                {projects[currentIndex].isPrivate ? (
+                  <a 
+                    href={`mailto:arulsj888@gmail.com?subject=Request Access to K-Quiz Repo&body=Hi Arul,%0D%0A%0D%0AI am interested in reviewing the architecture for the K-Quiz platform.%0D%0A%0D%0AMy GitHub Username is: `}
+                    className={styles.projectLink}
+                    style={{ 
+                      background: "rgba(255, 165, 0, 0.15)", 
+                      borderColor: "#ffae00", 
+                      color: "#ffae00",
+                      boxShadow: "0 0 10px rgba(255, 165, 0, 0.2)"
+                    }}
+                  >
+                    🔒 Request Code
+                  </a>
+                ) : projects[currentIndex].repoLink && (
+                  <a 
+                    href={projects[currentIndex].repoLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={styles.projectLink}
+                  >
+                    View Code
+                  </a>
+                )}
+              </div>
             </motion.div>
           </motion.div>
         </AnimatePresence>
