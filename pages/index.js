@@ -339,7 +339,7 @@ export default function Home() {
                     }}
                   >
                     <span style={{ fontSize: "1.5rem" }}>✉</span>
-                    <a href="mailto:arulvendhan.s@dsparkai.com" className="contact-link" style={{ fontSize: "1.1rem" }}>arulvendhan.s@dsparkai.com</a>
+                    <a href="mailto:vendhanarul664@gmail.com" className="contact-link" style={{ fontSize: "1.1rem" }}>vendhanarul664@gmail.com</a>
                   </motion.div>
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
