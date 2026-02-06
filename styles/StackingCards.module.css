@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
+
+.container {
+  --card-height: 40vw;
+  --card-margin: 4vw;
+  --card-top-offset: 1em;
+  
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  padding-bottom: 10vh;
+  min-height: 100vh;
+  position: relative;
+}
+
+.backButton {
+  position: fixed;
+  top: 40px;
+  right: 50px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 30px;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.backButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+.backArrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.backButton:hover .backArrow {
+  transform: translateX(-3px);
+}
+
+.backText {
+  line-height: 1;
+}
+
+.header {
+  height: 80vh;
+  display: grid;
+  place-items: center;
+}
+
+.footerHeader {
+  height: 50vh;
+  display: grid;
+  place-items: center;
+}
+
+.title {
+  font-size: clamp(3rem, 10vw, 10rem);
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 0.8;
+  margin: 0;
+  /* Typography styles */
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.5);
+  color: transparent;
+  background: linear-gradient(to bottom, #fff 0%, transparent 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  /* Scroll animation */
+  animation: fillText linear both;
+  animation-timeline: scroll();
+  animation-range: 0 50vh;
+}
+
+@keyframes fillText {
+  to {
+    -webkit-text-stroke: 0;
+    color: #fff;
+  }
+}
+
+.cards {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(10, var(--card-height));
+  gap: var(--card-margin);
+  padding-bottom: calc(10 * var(--card-margin));
+  margin-bottom: var(--card-margin);
+  max-width: 90vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  position: sticky;
+  top: 10vh;
+  height: var(--card-height);
+  padding-top: calc(var(--index) * var(--card-top-offset));
+  perspective: 1000px;
+}
+
+.cardContent {
+  box-sizing: border-box;
+  padding: 50px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  
+  /* Glassmorphism effect with light colors */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  
+  color: #1a1a2e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  
+  /* Light border with gradient */
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px 0 rgba(31, 38, 135, 0.15),
+    inset 0 0 60px rgba(255, 255, 255, 0.1);
+  
+  overflow: hidden;
+  position: relative;
+  transform-origin: 50% 0%;
+  will-change: transform, filter;
+  transform-style: preserve-3d;
+  
+  /* Animate based on viewport visibility */
+  animation: scaleCard linear forwards;
+  animation-timeline: view();
+  animation-range: exit-crossing 0% exit-crossing 100%;
+}
+
+/* Add subtle gradient overlay for each card */
+.cardContent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Unique gradient for each card */
+.card:nth-child(1) .cardContent::before {
+  background: linear-gradient(135deg, rgba(255, 182, 193, 0.3) 0%, rgba(255, 182, 193, 0.1) 100%);
+}
+
+.card:nth-child(2) .cardContent::before {
+  background: linear-gradient(135deg, rgba(173, 216, 230, 0.3) 0%, rgba(173, 216, 230, 0.1) 100%);
+}
+
+.card:nth-child(3) .cardContent::before {
+  background: linear-gradient(135deg, rgba(255, 253, 208, 0.3) 0%, rgba(255, 253, 208, 0.1) 100%);
+}
+
+.card:nth-child(4) .cardContent::before {
+  background: linear-gradient(135deg, rgba(221, 160, 221, 0.3) 0%, rgba(221, 160, 221, 0.1) 100%);
+}
+
+.card:nth-child(5) .cardContent::before {
+  background: linear-gradient(135deg, rgba(216, 191, 216, 0.3) 0%, rgba(216, 191, 216, 0.1) 100%);
+}
+
+.card:nth-child(6) .cardContent::before {
+  background: linear-gradient(135deg, rgba(152, 251, 152, 0.3) 0%, rgba(152, 251, 152, 0.1) 100%);
+}
+
+.card:nth-child(7) .cardContent::before {
+  background: linear-gradient(135deg, rgba(255, 218, 185, 0.3) 0%, rgba(255, 218, 185, 0.1) 100%);
+}
+
+.card:nth-child(8) .cardContent::before {
+  background: linear-gradient(135deg, rgba(176, 224, 230, 0.3) 0%, rgba(176, 224, 230, 0.1) 100%);
+}
+
+.card:nth-child(9) .cardContent::before {
+  background: linear-gradient(135deg, rgba(255, 192, 203, 0.3) 0%, rgba(255, 192, 203, 0.1) 100%);
+}
+
+.card:nth-child(10) .cardContent::before {
+  background: linear-gradient(135deg, rgba(230, 230, 250, 0.3) 0%, rgba(230, 230, 250, 0.1) 100%);
+}
+
+@keyframes scaleCard {
+  to {
+    transform: scale(0.8) translateY(-10vh) rotateX(-20deg);
+    filter: brightness(0.7);
+    border-radius: 20px;
+    box-shadow: 
+      0 50px 80px -10px rgba(31, 38, 135, 0.3),
+      inset 0 0 60px rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Content Styling */
+.projectName {
+  font-size: clamp(2rem, 4vw, 4rem);
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+  line-height: 1.1;
+  max-width: 80%;
+  position: relative;
+  z-index: 1;
+  color: #1a1a2e;
+}
+
+.description {
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  max-width: 700px;
+  line-height: 1.5;
+  opacity: 0.9;
+  margin: 0 0 2rem 0;
+  position: relative;
+  z-index: 1;
+  color: #2d2d44;
+}
+
+.tech {
+  font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+  opacity: 0.8;
+  font-weight: 300;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(26, 26, 46, 0.2);
+  max-width: 700px;
+  position: relative;
+  z-index: 1;
+  color: #3d3d5c;
+}
+
+.number {
+  font-size: clamp(6rem, 10vw, 10rem);
+  position: absolute;
+  right: 2rem;
+  top: -2rem;
+  opacity: 0.08;
+  font-weight: bold;
+  line-height: 1;
+  color: #1a1a2e;
+  z-index: 0;
+}
+
+/* Scroll Progress Circle (SVG) */
+.progressCircle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 80px;
+  height: 80px;
+  z-index: 100;
+}
+
+.progressCircle circle {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 6;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  stroke-dasharray: 251;
+  stroke-dashoffset: 251;
+  animation: progressSpin linear;
+  animation-timeline: scroll();
+}
+
+@keyframes progressSpin {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    --card-height: 60vh;
+    --card-margin: 3vh;
+  }
+
+  .backButton {
+    top: 20px;
+    right: 20px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+  }
+
+  .cardContent {
+    padding: 30px;
+    border-radius: 30px;
+  }
+
+  .number {
+    font-size: 5rem;
+    right: 1rem;
+    top: -1rem;
+  }
+
+  .progressCircle {
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    --card-height: 70vh;
+  }
+
+  .cardContent {
+    padding: 25px;
+  }
+
+  .projectName {
+    font-size: 1.8rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .tech {
+    font-size: 0.85rem;
+  }
+}

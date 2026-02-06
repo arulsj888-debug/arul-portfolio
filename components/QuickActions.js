@@ -1,13 +1,17 @@
 import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from '../styles/QuickActions.module.css';
 
 export default function QuickActions({ mode, onProjectsClick, onContactClick }) {
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState(true);
   const buttonRefs = {
     mail: useRef(null),
     contact: useRef(null),
-    projects: useRef(null)
+    projects: useRef(null),
+    gallery3d: useRef(null),
+    stackingcards: useRef(null)
   };
 
   useEffect(() => {
@@ -23,6 +27,10 @@ export default function QuickActions({ mode, onProjectsClick, onContactClick }) 
   const handleClick = (type) => {
     if (type === 'projects') {
       onProjectsClick();
+    } else if (type === 'gallery3d') {
+      router.push('/gallery3d');
+    } else if (type === 'stackingcards') {
+      router.push('/stackingcards');
     } else {
       onContactClick();
     }
@@ -55,7 +63,17 @@ export default function QuickActions({ mode, onProjectsClick, onContactClick }) 
       id: 'projects',
       icon: '📂',
       label: 'Projects'
-    }
+    },
+    ...(mode === 'dark' ? [{
+      id: 'gallery3d',
+      icon: '🎨',
+      label: '3D Gallery'
+    }] : []),
+    ...(mode === 'light' ? [{
+      id: 'stackingcards',
+      icon: '🎴',
+      label: 'Stacking Cards'
+    }] : [])
   ];
 
   return (

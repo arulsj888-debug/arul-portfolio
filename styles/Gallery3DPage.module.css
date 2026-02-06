@@ -1,0 +1,64 @@
+.pageContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #0d1f2b;
+}
+
+.backButton {
+  position: fixed;
+  top: 40px;
+  right: 50px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background: rgba(0, 170, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 170, 255, 0.4);
+  border-radius: 30px;
+  color: #00aaff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.backButton:hover {
+  background: rgba(0, 170, 255, 0.25);
+  border-color: rgba(0, 170, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 170, 255, 0.4);
+}
+
+.backArrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.backButton:hover .backArrow {
+  transform: translateX(-3px);
+}
+
+.backText {
+  line-height: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .backButton {
+    top: 20px;
+    right: 20px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+  }
+  
+  .backArrow {
+    font-size: 1rem;
+  }
+}
